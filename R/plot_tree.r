@@ -10,12 +10,16 @@
 #' @param col_lab The metadata column name of cell annotations
 #' @param col_barcode The metadata column name of iTracer barcodes
 #' @param col_scar The metadata column name of iTracer scars
+#' @param edge_alpha Edge alpha of the tree
+#' @param edge_width Edge width of the tree
 #' @rdname plot_tree
 #' @export plot_tree
 plot_tree <- function(metadata_df,
                       col_lab = NA,
                       col_barcode = 'GeneBarcodeMerged',
-                      col_scar = 'ScarMerged')
+                      col_scar = 'ScarMerged',
+                      edge_alpha = 0.25,
+                      edge_width = 0.1)
 {
   if(is.na(col_lab)){
     metadata_df[,'_mockLab'] <- 'mock'
@@ -58,7 +62,7 @@ plot_tree <- function(metadata_df,
   g <- graph_from_data_frame(tree_df3)
   V(g)$label <- as.character(node_labels[V(g)$name,"label"])
   tree <- ggraph(g, 'dendrogram', circular = TRUE) + 
-    geom_edge_diagonal() + 
+    geom_edge_diagonal(alpha = edge_alpha, width = edge_width) + 
     geom_node_point(aes(colour = label)) +
     coord_fixed() +
     theme_void() +

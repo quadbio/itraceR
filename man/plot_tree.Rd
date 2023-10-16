@@ -8,7 +8,9 @@ plot_tree(
   metadata_df,
   col_lab = NA,
   col_barcode = "GeneBarcodeMerged",
-  col_scar = "ScarMerged"
+  col_scar = "ScarMerged",
+  edge_alpha = 0.25,
+  edge_width = 0.1
 )
 }
 \arguments{
@@ -19,6 +21,10 @@ plot_tree(
 \item{col_barcode}{The metadata column name of iTracer barcodes}
 
 \item{col_scar}{The metadata column name of iTracer scars}
+
+\item{edge_alpha}{Edge alpha of the tree}
+
+\item{edge_width}{Edge width of the tree}
 }
 \description{
 Plot the lineage tree in the wheel shape
