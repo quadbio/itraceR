@@ -1,0 +1,22 @@
+Package: itraceR
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person("Zhisong", "He", , "zhisong.he@bsse.ethz.ch", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-1502-4801"))
+Description: This is the package to preprocess iTracer barcode/scar information
+    (https://doi.org/10.1038/s41592-021-01344-8).
+License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
+    license
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.2
+Imports:
+    dplyr
+    igraph
+    ggplot2
+    ggraph
+    stringdist
+    reshape2
+    mixtools
+    Rsamtools
