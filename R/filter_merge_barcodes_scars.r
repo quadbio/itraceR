@@ -221,3 +221,29 @@ merge_barcode_scars <- function(df_barcode, # filtered barcode table
   df_barcode_scar <- df_barcode_scar[which(df_barcode_scar$GeneBarcodeMerged!=""),]
   return(df_barcode_scar)
 }
+
+#' Incorporate the iTracer readout to the Seurat object
+#' 
+#' Incorporate the iTracer readout to the corresponding
+#' Seurat object
+#' 
+#' @import dplyr
+#' @param seurat Seurat object
+#' @param df_iTracer iTracer readout data frame
+#' @param col_barcode Column name in the seurat object meta.data slot for the iTracer barcodes. Default is 'GeneBarcodeMerged'
+#' @param col_scar Column name in the seurat object meta.data slot for the iTracer scars. Default is 'ScarMerged'
+#' @rdname incorporate_to_seurat
+#' @export incorporate_to_seurat
+incorporate_to_seurat <- function(seurat,
+                                  df_iTracer,
+                                  col_barcode = 'GeneBarcodeMerged',
+                                  col_scar = 'ScarMerged')
+{
+  seurat@meta.data[,c(col_barcode,col_scar)] <- seurat@meta.data %>%
+    tibble::rownames_to_column('cell') %>%
+    select(-c(GeneBarcodeMerged, ScarMerged)) %>%
+    left_join(df_barcode_scar, by = 'cell') %>%
+    select(c(GeneBarcodeMerged, ScarMerged))
+  
+  return(seurat)
+}
